@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Lab1</title>
+    
+    <style>
+        #givenRowsColumnsTable {
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+            width: 50%;
+        }
+
+        #givenRowsColumnsTable td, #givenRowsColumnsTable th {
+            border: 1px solid #000000;
+            text-align: center;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        #givenRowsColumnsTable th {
+            background-color: #808080;
+        }
+
+        #noMoreRowsToDeleteMsg {
+            font: bold;
+            color: red;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <table id="givenRowsColumnsTable">
+        <tr>
+            <td>Row1 Col1</td>
+            <td>Row1 Col2</td>
+        </tr>
+        <tr>
+            <td>Row2 Col1</td>
+            <td>Row2 Col2</td>
+        </tr>
+        <tr>
+            <td>Row3 Col1</td>
+            <td>Row3 Col2</td>
+        </tr>
+        <tr>
+            <td>Row4 Col1</td>
+            <td>Row4 Col2</td>
+        </tr>
+        <tr>
+            <td>Row5 Col1</td>
+            <td>Row5 Col2</td>
+        </tr>
+    </table>
+
+    <br>
+    <input type="button" onclick="insertRow()" value="Insert Row">
+    <input type="button" onclick="deleteRowTop()" value="Delete from Top">
+    <input type="button" onclick="deleteRowBottom()" value="Delete from Bottom">
+    
+    <p id="noMoreRowsToDeleteMsg"></p>
+
+    <script>
+        function insertRow() {
+            var table = document.getElementById("givenRowsColumnsTable");
+            var rowCount = table.rows.length;
+            var newRow = table.insertRow(rowCount);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            cell1.innerHTML = "Row" + (rowCount + 1) + " Col1";
+            cell2.innerHTML = "Row" + (rowCount + 1) + " Col2";
+
+            var noMoreRowsToDeleteMsg = document.getElementById("noMoreRowsToDeleteMsg");
+            if (noMoreRowsToDeleteMsg) {
+                noMoreRowsToDeleteMsg.innerHTML = "";
+            }
+        }
+
+        function deleteRowTop() {
+            var table = document.getElementById("givenRowsColumnsTable");
+            var rowCount = table.rows.length;
+
+            if (rowCount > 0) {
+                table.deleteRow(0);
+            } else {
+                var noMoreRowsToDeleteMsg = document.getElementById("noMoreRowsToDeleteMsg");
+                noMoreRowsToDeleteMsg.innerHTML = "No more rows to delete from table";
+            }
+        }
+
+        function deleteRowBottom() {
+            var table = document.getElementById("givenRowsColumnsTable");
+            var rowCount = table.rows.length;
+
+            if (rowCount > 0) {
+                table.deleteRow(rowCount - 1);
+            } else {
+                var noMoreRowsToDeleteMsg = document.getElementById("noMoreRowsToDeleteMsg");
+                noMoreRowsToDeleteMsg.innerHTML = "No more rows to delete from table";
+            }
+        }
+    </script>
+</body>
+</html>
